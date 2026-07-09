@@ -1,0 +1,45 @@
+{
+  "name": "@clawnify/browser-tabs",
+  "version": "0.1.0",
+  "description": "OpenClaw plugin — per-agent browser tab isolation. When multiple agents share one browser, each agent may only act on tabs it opened; omitted-target actions default to its own tab.",
+  "type": "module",
+  "openclaw": {
+    "extensions": [
+      "./index.ts"
+    ],
+    "install": {
+      "minHostVersion": ">=2026.3.22"
+    }
+  },
+  "files": [
+    "index.ts",
+    "src/**/*.ts",
+    "openclaw.plugin.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "openclaw",
+    "openclaw-plugin",
+    "browser",
+    "multi-agent",
+    "isolation",
+    "tabs"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "homepage": "https://github.com/clawnify/browser-tabs#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clawnify/browser-tabs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/clawnify/browser-tabs/issues"
+  },
+  "author": "Clawnify"
+}
