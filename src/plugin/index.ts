@@ -136,7 +136,7 @@ const lastTabByAgent = new Map<string, string>(); // agentId -> its most-recent 
 
 const plugin: PluginEntry = {
   id: "clawnify-browser-tabs",
-  name: "Clawnify Browser Tabs (per-agent isolation)",
+  name: "Browser Tabs (per-agent isolation)",
   description:
     "Scopes the shared browser to the calling agent: an agent may only act on tabs it opened, keyed by the stable tabId.",
 
