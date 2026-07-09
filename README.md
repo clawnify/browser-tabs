@@ -2,6 +2,8 @@
 
 Per-agent browser tab isolation for OpenClaw, when multiple agents share **one** browser.
 
+By [Clawnify](https://clawnify.com).
+
 ## The problem
 
 Run several OpenClaw agents against a single shared Chrome (one CDP endpoint) and they share one flat tab namespace. When they work at the same time they step on each other's tabs — you'll see `tab not found`, `action targetId must match request targetId`, and stale refs, because one agent's snapshot/act lands on a tab another agent just changed.
@@ -59,3 +61,7 @@ Ownership is in-memory: a full gateway restart resets it (it self-heals as agent
 ## License
 
 MIT.
+
+---
+
+Built by [Clawnify](https://clawnify.com) — managed OpenClaw AI agents for non-technical teams.
