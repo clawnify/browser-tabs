@@ -1,4 +1,49 @@
-import { definePluginEntry } from "openclaw/plugin-sdk/plugin-entry";
+// This plugin depends on only a small, stable subset of OpenClaw's plugin SDK.
+// We declare that surface locally — matching what the gateway passes to
+// register() at load time — so the package builds standalone without installing
+// the full `openclaw` host as a build dependency.
+interface PluginLogger {
+  info(message: string): void;
+}
+interface ToolContext {
+  agentId?: string;
+  sessionKey?: string | null;
+}
+interface BeforeToolCallEvent {
+  toolName: string;
+  params?: Record<string, unknown>;
+}
+interface AfterToolCallEvent {
+  toolName: string;
+  params?: Record<string, unknown>;
+  result?: unknown;
+  error?: unknown;
+}
+interface BeforeToolCallResult {
+  params?: Record<string, unknown>;
+  block?: boolean;
+  blockReason?: string;
+}
+interface PluginApi {
+  pluginConfig?: unknown;
+  logger: PluginLogger;
+  on(
+    event: "before_tool_call",
+    handler: (event: BeforeToolCallEvent, ctx: ToolContext) => BeforeToolCallResult | void,
+    opts?: { priority?: number },
+  ): void;
+  on(
+    event: "after_tool_call",
+    handler: (event: AfterToolCallEvent, ctx: ToolContext) => void,
+    opts?: { priority?: number },
+  ): void;
+}
+interface PluginEntry {
+  id: string;
+  name: string;
+  description: string;
+  register(api: PluginApi): void;
+}
 
 // Per-agent browser tab isolation over ONE shared Chrome (shared logins).
 //
@@ -89,7 +134,7 @@ const canonById = new Map<string, string>(); // any handle (raw/label/tabId) -> 
 const ownerByTab = new Map<string, string>(); // canonical tabId -> agentId
 const lastTabByAgent = new Map<string, string>(); // agentId -> its most-recent canonical tabId
 
-export default definePluginEntry({
+const plugin: PluginEntry = {
   id: "clawnify-browser-tabs",
   name: "Clawnify Browser Tabs (per-agent isolation)",
   description:
@@ -219,4 +264,6 @@ export default definePluginEntry({
 
     api.logger.info("clawnify-browser-tabs registered (per-agent browser action isolation)");
   },
-});
+};
+
+export default plugin;

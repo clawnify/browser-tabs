@@ -3,6 +3,9 @@
   "name": "Clawnify Browser Tabs (per-agent isolation)",
   "description": "Scopes the shared browser to the calling agent: each agent may only act on tabs it opened, and omitted-target actions default to the agent's own tab — so concurrent agents stop colliding on one Chrome. Interim action-isolation via before/after tool-call hooks; the complete server-side list-scoping is proposed upstream (openclaw/openclaw).",
   "version": "0.1.0",
+  "activation": {
+    "onStartup": true
+  },
   "configSchema": {
     "type": "object",
     "additionalProperties": false,
